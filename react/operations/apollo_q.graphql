@@ -48,3 +48,9 @@ mutation CreateCoupon($coupon: CouponCreateInput!) {
     id
   }
 }
+mutation RedeemCoupon($couponCode: String!) {
+  redeemCoupon(couponCode: $couponCode) {
+    code
+    id
+  }
+}

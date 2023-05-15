@@ -80,7 +80,7 @@ export default class UserService {
           userId: id,
         },
       });
-      if (validCoupons.length === 0) {
+      if (validCoupons.length === 0 && user.points < 1000) {
         throw new Error(
           "You have exhausted your attempts and don't have unredeemed coupons, you are banned from using this application"
         );
