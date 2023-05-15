@@ -29,6 +29,13 @@ export class UserValidations {
   private async validatePassword(password: string) {
     await passwordSchema.validate(password);
   }
+  private async validateAge(dob: Date) {
+    // Check if user is 18 years old
+    const age = new Date().getFullYear() - new Date(dob).getFullYear();
+    if (age < 18) {
+      throw new yup.ValidationError('You must be 18 years old');
+    }
+  }
   async validateUserSignUp(input: UserCreateInput) {
     // The return of function gets passed down the water fall to the next validation
     return new Promise((resolve, reject) => {
@@ -45,6 +52,14 @@ export class UserValidations {
           async (input: UserCreateInput, next) => {
             try {
               await this.validatePassword(input.password);
+              next(undefined, input);
+            } catch (err) {
+              next(err);
+            }
+          },
+          async (input: UserCreateInput, next) => {
+            try {
+              await this.validateAge(input.dob);
               next(undefined, input);
             } catch (err) {
               next(err);

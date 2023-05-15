@@ -17,7 +17,7 @@ export default function authenticationMiddleware<
     const { req, res } = context as any;
     return new Promise<ReturnType>((resolve, reject) => {
       passport.authenticate('jwt', { session: false }, (err, user, info) => {
-        if (err) reject(err);
+        if (err) return reject(err);
         if (!user)
           reject(
             new GraphQLError(info.message ?? 'User is not authenticated', {

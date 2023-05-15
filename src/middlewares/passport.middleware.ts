@@ -1,22 +1,24 @@
 import { Strategy, ExtractJwt } from 'passport-jwt';
 import { jwtSecret } from '../config';
 import prisma from '../db/db';
+import UserService from '../modules/user/services/user.service';
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: jwtSecret,
 };
-async function checkUserExists(id: number) {
+async function checkUserExistsAndIsValid(id: number) {
   const userExists = await prisma.user.findUnique({
     where: {
       id,
     },
   });
+  const result = await new UserService().checkIfUserCanPlay(id);
   return !userExists ? undefined : userExists;
 }
 export default (passport) => {
   passport.use(
     new Strategy(options, async (payload, done) => {
-      await checkUserExists(payload.id)
+      await checkUserExistsAndIsValid(payload.id)
         .then(async (user) => {
           if (user) {
             return done(undefined, user);
@@ -24,8 +26,7 @@ export default (passport) => {
           return done(undefined, false);
         })
         .catch((err) => {
-          console.log(err);
-          done(undefined, false);
+          done(err, false);
         });
     })
   );

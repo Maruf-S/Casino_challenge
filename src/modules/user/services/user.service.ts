@@ -40,6 +40,7 @@ export default class UserService {
         },
       });
     }
+    await this.checkIfUserCanPlay(user.id);
     const token = sign(
       {
         id: user.id,
@@ -64,5 +65,26 @@ export default class UserService {
         email,
       },
     });
+  }
+  async checkIfUserCanPlay(id: number) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (user && user.attempts <= 0) {
+      // Check if user has coupons
+      const validCoupons = await prisma.coupon.findMany({
+        where: {
+          active: true,
+          userId: id,
+        },
+      });
+      if (validCoupons.length === 0) {
+        throw new Error(
+          "You have exhausted your attempts and don't have unredeemed coupons, you are banned from using this application"
+        );
+      }
+    }
   }
 }
