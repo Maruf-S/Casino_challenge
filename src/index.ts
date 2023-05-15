@@ -7,6 +7,7 @@ import helmet = require('helmet');
 import { ApolloServer } from '@apollo/server';
 import { resolvers, typeDefs } from './graphql';
 import { expressMiddleware } from '@apollo/server/express4';
+import path = require('path');
 export default class Server {
   constructor(app: Application) {
     (async () => {
@@ -34,6 +35,10 @@ export default class Server {
         },
       })
     );
+    app.use('/', estatic(path.join(__dirname, '../www')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../www/index.html'));
+    });
   }
 }
 
