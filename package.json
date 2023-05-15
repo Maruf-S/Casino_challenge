@@ -14,7 +14,8 @@
     "migrations:run": "prisma migrate deploy",
     "seed": "tsc && node src/db/seed.js",
     "generate": "graphql-codegen",
-    "prod": "npm run build && npm run dist"
+    "prod": "npm run build && npm run dist",
+    "stop-forever": "forever stopall"
   },
   "engines": {
     "node": ">=8.0"
