@@ -2,6 +2,7 @@
   "name": "challenge",
   "version": "1.0.0",
   "description": "Test Run 1.0",
+  "homepage": ".",
   "scripts": {
     "build": "tsc && copyfiles -u 1 \"src/**/*.graphql\" \"dist/src\" && cp -R ./www dist/",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
