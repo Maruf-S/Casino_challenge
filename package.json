@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Test Run 1.0",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 \"src/**/*.graphql\" \"dist/src\"",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "dev": "nodemon server.ts",
@@ -13,7 +13,8 @@
     "migrations:generate": "prisma migrate dev --name",
     "migrations:run": "prisma migrate deploy",
     "seed": "tsc && node src/db/seed.js",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "prod": "npm run build && npm run dist"
   },
   "engines": {
     "node": ">=8.0"
@@ -34,6 +35,8 @@
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.11",
     "@types/helmet": "4.0.0",
+    "copyfiles": "^2.4.1",
+    "cpy-cli": "^4.2.0",
     "nodemon": "^2.0.22",
     "prisma": "^4.14.0",
     "ts-node-dev": "^2.0.0",

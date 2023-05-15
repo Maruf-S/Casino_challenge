@@ -1,4 +1,4 @@
-mutation Mutation($input: UserCreateInput!) {
+mutation Register($input: UserCreateInput!) {
   registerUser(input: $input) {
     attempts
     dob
