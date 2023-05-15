@@ -8,7 +8,7 @@
     "lint:fix": "npm run lint -- --fix",
     "dev": "nodemon server.ts",
     "dev:migrate": "npm run migrations:run && npm run dev",
-    "dist": "forever start server.js",
+    "dist": "forever start dist/server.js",
     "dist:migrate": "npm run migrations:run && node dist/server.js",
     "migrations:generate": "prisma migrate dev --name",
     "migrations:run": "prisma migrate deploy",
