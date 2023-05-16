@@ -4,6 +4,7 @@
   "description": "Test Run 1.0",
   "homepage": ".",
   "scripts": {
+    "install-ts": "npm install -g typescript",
     "build": "tsc && copyfiles -u 1 \"src/**/*.graphql\" \"dist/src\" && cp -R ./www dist/",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
@@ -15,7 +16,7 @@
     "migrations:run": "prisma migrate deploy",
     "seed": "tsc && node src/db/seed.js",
     "generate": "graphql-codegen",
-    "start": "npm run build && npm run dist",
+    "start": "npm run install-ts && npm run build && npm run dist",
     "stop-forever": "forever stopall"
   },
   "engines": {
