@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { jwtSecret } from '../../../config';
 import AuthRepository from '../../../repositories/AuthRepository';
 import { UserValidations } from '../../../utils/validations';
-
+import prisma from '../../../db/db';
 import {
   LoginInput,
   LoginResponse,
