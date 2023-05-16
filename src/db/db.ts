@@ -6,13 +6,14 @@ if (!dbUrl) {
   process.exit(0);
 }
 
+let prisma: PrismaClient;
 declare global {
   var prisma: PrismaClient;
 }
 
 if (process.env.NODE_ENV === 'production') {
   // tslint:disable-next-line:prefer-const
-  let prisma = new PrismaClient();
+  prisma = new PrismaClient();
 } else {
   if (!global.prisma) {
     global.prisma = new PrismaClient();
