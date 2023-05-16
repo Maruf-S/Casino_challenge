@@ -27,7 +27,7 @@ export class CouponValidations {
     }
   }
   async validateRedeemCoupon(userId: number, code: string) {
-    const coupon = await prisma.coupon.findUnique({
+    const coupon = await this.prisma.coupon.findUnique({
       where: {
         code: code,
       },

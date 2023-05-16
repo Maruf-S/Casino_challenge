@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { jwtSecret } from '../../../config';
 import { CouponValidations } from '../../../utils/validations/coupon';
 import { CouponCreateInput } from '../generated-types/coupon-resolvers-types';
+import prisma from '../../../db/db';
 export default class CouponService {
   couponValidation: CouponValidations;
   constructor() {
