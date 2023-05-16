@@ -16,6 +16,7 @@ export default class Server {
   }
 
   public async config(app: Application): Promise<void> {
+    process.env.NODE_ENV === 'development';
     app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
     app.use(cors());
     app.use(json());
