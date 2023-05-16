@@ -16,7 +16,7 @@
     "migrations:run": "prisma migrate deploy",
     "seed": "tsc && node src/db/seed.js",
     "generate": "graphql-codegen",
-    "start": "npm run install-dep && npm run build && npm run dist",
+    "start": "npm run install-dep && npm run dev",
     "stop-forever": "forever stopall"
   },
   "engines": {
