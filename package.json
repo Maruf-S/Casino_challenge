@@ -4,18 +4,19 @@
   "description": "Test Run 1.0",
   "homepage": ".",
   "scripts": {
+    "tsc": "./node_modules/typescript/bin/tsc",
     "build": "tsc && copyfiles -u 1 \"src/**/*.graphql\" \"dist/src\" && cp -R ./www dist/",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "dev": "nodemon server.ts",
     "dev:migrate": "npm run migrations:run && npm run dev",
-    "dist": "forever start dist/server.js",
+    "dist": "node dist/server.js",
     "dist:migrate": "npm run migrations:run && node dist/server.js",
     "migrations:generate": "prisma migrate dev --name",
     "migrations:run": "prisma migrate deploy",
     "seed": "tsc && node src/db/seed.js",
     "generate": "graphql-codegen",
-    "prod": "npm run build && npm run dist",
+    "start": "npm run build && npm run dist",
     "stop-forever": "forever stopall"
   },
   "engines": {
